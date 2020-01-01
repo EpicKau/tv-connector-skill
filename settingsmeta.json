@@ -1,0 +1,44 @@
+{
+    "name": "Tv Connector Skill",
+	"skillMetadata": {
+        "sections": [
+            {
+                "name": "Settings",
+                "fields": [
+                    {
+                        "name": "tv_mac",
+                        "type": "text",
+                        "label": "Tv Mac",
+                        "value": ""
+                    },
+                    {
+                        "name": "tv_ip",
+                        "type": "text",
+                        "label": "Tv Ip",
+                        "value": ""
+                    },
+                    {
+                        "name": "tv_type",
+                        "type": "select",
+                        "label": "Tv Type",
+                        "options": "Websocket|websocket;Legacy|legacy;",
+                        "value": "websocket"
+                    },
+                    {
+                        "name": "tv_port",
+                        "type": "text",
+                        "label": "Tv Port",
+                        "value": "55000"
+                    },
+                    {
+                        "name": "tv_name",
+                        "type": "text",
+                        "label": "Tv Name",
+                        "value": "Tv Connector",
+                        "placeholder": "Name of the remote controller."
+                    },
+                ]
+            }
+        ]
+    }
+}

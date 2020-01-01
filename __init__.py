@@ -13,7 +13,7 @@
 # 
 
 import time
-
+import samsungctl
 from mycroft.messagebus.message import Message
 from mycroft.skills.core import MycroftSkill, intent_handler
 from adapt.intent import IntentBuilder

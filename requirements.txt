@@ -1,2 +1,6 @@
+time
+socket
+websocket
 wakeonlan
+json
 git+https://github.com/EpicKau/samsungctl.git

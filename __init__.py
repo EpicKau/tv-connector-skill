@@ -12,6 +12,7 @@
 #
 # 
 
+
 from mycroft.messagebus.message import Message
 from mycroft.skills.core import MycroftSkill, intent_handler
 from adapt.intent import IntentBuilder
@@ -25,16 +26,7 @@ import socket
 import websocket
 import json
 
-class TvConnect(MycroftSkill):
-
-    config = {
-        "name": self.settings["tv_name"],
-        "mac": self.settings["tv_mac"],
-        "host": self.settings["tv_ip"],
-        "port": self.settings["tv_port"],
-        "method": self.settings["tv_type"],
-        "timeout": 5
-    }
+class TvConnector(MycroftSkill):
 
     def startTv(self):
         self.log.info("startTv")
@@ -43,9 +35,8 @@ class TvConnect(MycroftSkill):
     def stopTv(self):
         self.log.info("stopTv")
 
-
         try:
-            with samsungctl.Remote(config) as remote:
+            with samsungctl.Remote(self.config) as remote:
                 remote.control("KEY_POWER")
             return True
 
@@ -77,7 +68,7 @@ class TvConnect(MycroftSkill):
             self.log.info(appId)
 
             try:
-                with samsungctl.Remote(config) as remote:
+                with samsungctl.Remote(self.config) as remote:
                     remote.launch(appId)
                     return True
 
@@ -91,7 +82,7 @@ class TvConnect(MycroftSkill):
         self.log.info("getApps")
 
         try:
-            with samsungctl.Remote(config) as remote:
+            with samsungctl.Remote(self.config) as remote:
                 apps = remote.get_installed_apps()
                 apps = json.loads(apps)
 
@@ -123,12 +114,21 @@ class TvConnect(MycroftSkill):
         self.log.info("tv_port: " + self.settings["tv_port"])
         self.log.info("tv_name: " + self.settings["tv_name"])
 
-    @intent_handler(IntentBuilder("").require("start").require("device"))
+        self.config = {
+            "name": self.settings["tv_name"],
+            "mac": self.settings["tv_mac"],
+            "host": self.settings["tv_ip"],
+            "port": self.settings["tv_port"],
+            "method": self.settings["tv_type"],
+            "timeout": 5
+        }
+
+    @intent_handler(IntentBuilder("StartIntent").require("device"))
     def handle_start_tv_intent(self, message):
         self.startTv()
         self.speak_dialog("default")
 
-    @intent_handler(IntentBuilder("").require("stop").require("device"))
+    @intent_handler(IntentBuilder("StopIntent").require("device"))
     def handle_stop_tv_intent(self, message):
         self.stopTv()
         self.speak_dialog("default")
@@ -139,5 +139,5 @@ class TvConnect(MycroftSkill):
         self.startApp(app)
 
 def create_skill():
-    return TvConnect()
+    return TvConnector()
 

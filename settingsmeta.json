@@ -20,7 +20,7 @@
                         "name": "tv_type",
                         "type": "select",
                         "label": "Tv Type",
-                        "options": "Websocket|websocket;Legacy|legacy;",
+                        "options": "Websocket|websocket;Legacy|legacy",
                         "value": "websocket"
                     },
                     {

@@ -1,5 +1,4 @@
 {
-    "name": "Tv Connector Skill",
 	"skillMetadata": {
         "sections": [
             {
@@ -36,7 +35,7 @@
                         "label": "Tv Name",
                         "value": "Tv Connector",
                         "placeholder": "Name of the remote controller."
-                    },
+                    }
                 ]
             }
         ]
